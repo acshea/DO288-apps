@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -d /tmp/artifacts/.m2 ]; then
+  echo "---> Restoring maven artifacts..."
+  mv /tmp/artifacts/.m2 ${HOME}/
+fi
+
+exec /usr/local/s2i/assemble
