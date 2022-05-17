@@ -20,7 +20,7 @@ route.get('/', function (req, res) {
 });
 
 route.get('/timeouts', function (req, res) {
-  res.send('READY TIMEOUT:' + );
+  res.send('READY TIMEOUT:' + readytimeout);
 });
 
 // A route that returns readiness status
