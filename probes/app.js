@@ -6,20 +6,28 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
   healthy = true,
   ready = true;
 
+var username = process.env.CUSTOM_USER_ID || "ROBOT";
+
+var readytimeout = process.env.READY_TIMEOUT || 30;
+
 var route = express.Router();
 
 app.use('/', route);
 
 // A route that says hello
 route.get('/', function (req, res) {
-  res.send('Hello! This is the newer index page for the app.\n');
+  res.send('Hello ' + username + '!\n');
+});
+
+route.get('/timeouts', function (req, res) {
+  res.send('READY TIMEOUT:' + );
 });
 
 // A route that returns readiness status
 route.get('/ready', function (req, res) {
   var now = Math.floor(Date.now() / 1000);
   var lapsed = now - started;
-  if (ready && (lapsed > 30)) {
+  if (ready && (lapsed > readytimeout)) {
     console.log('ping /ready => pong [ready]');
     res.send('Ready for service requests...\n');
   }
